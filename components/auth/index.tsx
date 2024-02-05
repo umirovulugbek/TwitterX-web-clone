@@ -1,11 +1,34 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useCallback } from "react";
 import Button from "../ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import useRegisterModal from "@/hook/useRegisterModal";
+import RegisterModal from "../modals/register-modal";
+import useLoginModal from "@/hook/useLoginModal";
+import LoginModal from "../modals/login-modal";
+import { signIn, useSession } from "next-auth/react";
+
 const Auth = () => {
+  const registermodal = useRegisterModal();
+  const loginmodal = useLoginModal();
+
+  const { data } = useSession();
+  console.log(data);
+  const onOpenRegisterModal = useCallback(() => {
+    registermodal.onOpen();
+  }, [registermodal]);
+
+  const onOpenLoginModal = useCallback(() => {
+    loginmodal.onOpen();
+  }, [loginmodal]);
+
   return (
     <>
+      <RegisterModal />
+      <LoginModal />
       <div className="grid  grid-cols-1 md:grid-cols-2 gap-10 items-center h-screen">
         <Image
           src={"/images/x.svg"}
@@ -29,6 +52,7 @@ const Auth = () => {
             <h2 className="font-bold text-3xl mb-4">Join today.</h2>
             <div className="flex flex-col space-y-2">
               <Button
+                onClick={() => signIn("google")}
                 label={
                   <div className="flex gap-2 items-center justify-center">
                     <FcGoogle />
@@ -39,6 +63,7 @@ const Auth = () => {
                 secondary
               />
               <Button
+                onClick={() => signIn("github")}
                 label={
                   <div className="flex gap-2 items-center justify-center">
                     <FaGithub />
@@ -55,7 +80,11 @@ const Auth = () => {
                 <div className="h-px bg-gray-700 w-1/2"></div>
               </div>
 
-              <Button label={"Create account"} fullWidth />
+              <Button
+                label={"Create account"}
+                fullWidth
+                onClick={onOpenRegisterModal}
+              />
               <div className="text-[10px] text-gray-400">
                 By signing up, you agree to the
                 <span className="text-sky-500"> Terms of Service </span> and
@@ -68,8 +97,13 @@ const Auth = () => {
             <h3 className="font-medium text-xl mb-4">
               Already have a account?
             </h3>
-            <button></button>
-            <Button label={"Signin"} outline fullWidth />
+
+            <Button
+              label={"Signin"}
+              outline
+              fullWidth
+              onClick={onOpenLoginModal}
+            />
           </div>
         </div>
       </div>

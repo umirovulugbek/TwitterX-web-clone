@@ -9,6 +9,7 @@ interface Buttonprops {
   type?: "button" | "submit";
   outline?: boolean;
   onClick?: () => void;
+  classNames: string;
 }
 const Button = ({
   label,
