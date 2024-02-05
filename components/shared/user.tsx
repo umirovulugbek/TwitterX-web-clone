@@ -16,10 +16,9 @@ const User = ({ user }: { user: IUser }) => {
             {user?.name}
           </p>
           <div className="text-sm text-neutral-400 line-clamp-1">
-            {
-              user.username && `${sliceText(user.email, 15)}`
-              // : `${sliceText(user.email, 15)}`
-            }
+            {user.username !== undefined && user?.username !== ""
+              ? `${sliceText(user.username, 15)}`
+              : `${sliceText(user.email, 15)}`}
           </div>
         </div>
       </div>

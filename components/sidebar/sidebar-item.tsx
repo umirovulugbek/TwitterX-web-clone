@@ -17,7 +17,7 @@ const SidebarItem = ({ icon: Icon, label, notification }: Props) => {
       </div>
 
       {/* DESKTOP SIDEBAR ITEM */}
-      <div className="relative hidden lg:flex gap-4 p-4 rounded-full hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer items-center">
+      <div className=" w-full relative hidden lg:flex gap-4 p-4 rounded-full hover:bg-slate-300 hover:bg-opacity-10 cursor-pointer items-center">
         <Icon size={24} color="white" />
         <p className="hidden lg:block text-xl text-white">{label}</p>
         {notification ? (

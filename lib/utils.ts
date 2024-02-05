@@ -6,6 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function sliceText(text: string, length: number) {
-  if (text.length <= length) return text;
-  return text.slice(0, length) + "...";
+  if (text?.length <= length) return text;
+  return text?.slice(0, length) + "...";
 }
