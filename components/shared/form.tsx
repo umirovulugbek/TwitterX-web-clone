@@ -10,30 +10,54 @@ interface Props {
   user: IUser;
   placeholder: string;
   setPosts: Dispatch<SetStateAction<IPost[]>>;
+  isComment?: boolean;
+  postId?: string;
 }
-const Form = ({ placeholder, user, setPosts }: Props) => {
+const Form = ({ placeholder, user, setPosts, isComment, postId }: Props) => {
   const [body, setBody] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async () => {
     try {
       setIsLoading(true);
+      if (isComment) {
+        const { data } = await axios.post("/api/comments", {
+          body,
+          userId: user._id,
+          postId,
+        });
+        const newComment = {
+          ...data,
+          user,
+          likes: 0,
+          hasLiked: false,
+        };
+        setPosts((prev) => [newComment, ...prev]);
 
-      const { data } = await axios.post("/api/posts", {
-        body,
-        userId: user._id,
-      });
+        setBody("");
+      } else {
+        const { data } = await axios.post("/api/posts", {
+          body,
+          userId: user._id,
+        });
 
-      const newPost = { ...data, user };
+        const newPost = {
+          ...data,
+          user,
+          likes: 0,
+          hasLiked: false,
+          comments: [],
+        };
 
-      setPosts((prev) => [newPost, ...prev]);
+        setPosts((prev) => [newPost, ...prev]);
 
-      toast({
-        title: "Success",
-        description: "Post created successfully",
-      });
+        toast({
+          title: "Success",
+          description: "Post created successfully",
+        });
+        setBody("");
+      }
       setIsLoading(false);
-      setBody("");
     } catch (error) {
       setIsLoading(false);
       toast({
@@ -65,7 +89,7 @@ const Form = ({ placeholder, user, setPosts }: Props) => {
 
           <div className="mt-4 flex flex-row justify-end">
             <Button
-              label={"Post"}
+              label={isComment ? "Replay" : "Post"}
               classNames="px-8"
               disabled={isLoading || !body}
               onClick={onSubmit}

@@ -13,7 +13,6 @@ import React, { useEffect, useState } from "react";
 const Page = () => {
   // const session: any = await getServerSession(authOptions);/
   const { data: session, status }: any = useSession();
-
   const [post, setPost] = useState<IPost[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +23,7 @@ const Page = () => {
   const getPost = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get("/api/posts?limit=10");
+      const { data } = await axios.get("/api/posts?limit=50");
       setPost(data);
       setIsLoading(false);
     } catch (error) {

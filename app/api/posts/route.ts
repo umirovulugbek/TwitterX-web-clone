@@ -38,23 +38,23 @@ export async function GET(req: Request) {
       .limit(Number(limit))
       .sort({ createdAt: -1 });
 
-    // const filteredPosts = posts.map((post) => ({
-    //   body: post.body,
-    //   createdAt: post.createdAt,
-    //   user: {
-    //     _id: post.user._id,
-    //     name: post.user.name,
-    //     username: post.user.username,
-    //     profileImage: post.user.profileImage,
-    //     email: post.user.email,
-    //   },
-    //   likes: post.likes.length,
-    //   comments: post.comments.length,
-    //   hasLiked: post.likes.includes(currentUser._id),
-    //   _id: post._id,
-    // }));
+    const filteredPosts = posts.map((post) => ({
+      body: post.body,
+      createdAt: post.createdAt,
+      user: {
+        _id: post.user._id,
+        name: post.user.name,
+        username: post.user.username,
+        profileImage: post.user.profileImage,
+        email: post.user.email,
+      },
+      likes: post.likes.length,
+      comments: post.comments.length,
+      hasLiked: post.likes.includes(currentUser._id),
+      _id: post._id,
+    }));
 
-    return NextResponse.json(posts);
+    return NextResponse.json(filteredPosts);
   } catch (error) {
     const result = error as Error;
     return NextResponse.json({ error: result.message }, { status: 400 });
