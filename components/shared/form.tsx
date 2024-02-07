@@ -51,10 +51,6 @@ const Form = ({ placeholder, user, setPosts, isComment, postId }: Props) => {
 
         setPosts((prev) => [newPost, ...prev]);
 
-        toast({
-          title: "Success",
-          description: "Post created successfully",
-        });
         setBody("");
       }
       setIsLoading(false);
@@ -71,7 +67,7 @@ const Form = ({ placeholder, user, setPosts, isComment, postId }: Props) => {
   return (
     <div className="border-b-[1px] border-neutral-800 px-5 py-2">
       <div className="flex flex-row gap-4">
-        <Avatar>
+        <Avatar className="mt-2">
           <AvatarImage src={user?.profileImage} />
           <AvatarFallback>{user?.name[0]}</AvatarFallback>
         </Avatar>

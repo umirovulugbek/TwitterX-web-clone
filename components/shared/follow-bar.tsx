@@ -32,6 +32,7 @@ const FollowBar = () => {
           </div>
         ) : (
           <div className="flex flex-col mt-4 px-2">
+            <div className="border-b-[1px] border-neutral-800 h-[2px] w-full"></div>
             {users?.map((user: IUser) => (
               <Link key={user._id} href={`/profile/${user._id}`}>
                 <User user={user} />

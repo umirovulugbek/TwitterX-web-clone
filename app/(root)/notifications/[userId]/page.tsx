@@ -14,7 +14,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
   const [isClearing, setIsClearing] = useState(false);
 
   const { data, isLoading, mutate } = useNotifications(params.userId);
-  console.log(data, "data");
+
   const onClear = async () => {
     try {
       setIsClearing(true);
@@ -29,7 +29,7 @@ const Page = ({ params }: { params: { userId: string } }) => {
 
   return (
     <>
-      <Header isBack label="Notifications" />
+      <Header label="Notifications" isBack />
       {isLoading ? (
         <div className="flex justify-center items-center h-24">
           <Loader2 className="animate-spin text-sky-500" />

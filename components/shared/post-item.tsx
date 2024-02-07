@@ -109,11 +109,8 @@ const PostItem = ({ post, user, setPosts }: Props) => {
           </div>
         </div>
       )}
-      <div
-        className="flex flex-row items-center gap-3 cursor-pointer"
-        onClick={goToPost}
-      >
-        <Avatar onClick={goToProfile}>
+      <div className="flex flex-row    gap-3 cursor-pointer" onClick={goToPost}>
+        <Avatar onClick={goToProfile} className="mt-2">
           <AvatarImage src={post.user.profileImage} />
           <AvatarFallback>{post.user.name[0]}</AvatarFallback>
         </Avatar>

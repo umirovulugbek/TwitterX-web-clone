@@ -24,7 +24,7 @@ const Page = () => {
   }, [data]);
 
   return (
-    <div>
+    <>
       <Header label="Home" />
       {isLoading || status === "loading" ? (
         <div className="flex justify-center items-center h-24">
@@ -48,7 +48,7 @@ const Page = () => {
           ))}
         </>
       )}
-    </div>
+    </>
   );
 };
 

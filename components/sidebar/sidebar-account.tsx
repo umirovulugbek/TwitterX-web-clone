@@ -25,9 +25,9 @@ const SidebarAccount = ({ user }: Props) => {
   return (
     <>
       {/* MOBIE SIDEBAR ACCOUNT */}
-      <div className="lg:hidden block">
+      <div className="lg:hidden flex justify-center ">
         <div
-          className="mt-6 lg:hidden rounded-full h-14 w-14 p-4 flex items-center justify-center bg-red-500 hover:bg-opacity-80 transition cursor-pointer"
+          className="mt-6 lg:hidden rounded-full h-10 w-10 p-2 flex items-center justify-center bg-red-500 hover:bg-opacity-80 transition cursor-pointer"
           onClick={() => signOut()}
         >
           <RiLogoutCircleLine size={24} color="white" />
@@ -55,9 +55,9 @@ const SidebarAccount = ({ user }: Props) => {
             <MoreHorizontal size={24} color="white" />
           </div>
         </PopoverTrigger>
-        <PopoverContent className="bg-black border-none rounded-2xl shadow shadow-white px-0 mb-3">
+        <PopoverContent className="bg-black  rounded-2xl  shadow-grey border-gray-500 px-0 mb-3">
           <div
-            className="font-bold text-white cursor-pointer hover:bg-slate-300 hover:bg-opacity-10 p-4 transition"
+            className="font-bold text-white cursor-pointer hover:bg-slate-300 hover:bg-opacity-10 px-4 transition"
             onClick={() => signOut()}
           >
             Log out{" "}
