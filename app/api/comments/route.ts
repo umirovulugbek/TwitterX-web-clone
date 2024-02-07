@@ -1,5 +1,7 @@
 import Comment from "@/database/comment.model";
+import Notification from "@/database/natification.model";
 import Post from "@/database/post.model";
+import User from "@/database/user.model";
 import { authOptions } from "@/lib/auth-option";
 import { connectToDatabase } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
@@ -14,15 +16,15 @@ export async function POST(req: Request) {
       $push: { comments: comment._id },
     });
 
-    //   await Notification.create({
-    //     user: String(post.user),
-    //     body: "Someone replied on your post!",
-    //   });
+    await Notification.create({
+      user: String(post.user),
+      body: "Someone replied on your post!",
+    });
 
-    //   await User.findOneAndUpdate(
-    //     { _id: String(post.user) },
-    //     { $set: { hasNewNotifications: true } }
-    //   );
+    await User.findOneAndUpdate(
+      { _id: String(post.user) },
+      { $set: { hasNewNotifications: true } }
+    );
 
     return NextResponse.json(comment);
   } catch (error) {
@@ -41,15 +43,15 @@ export async function PUT(req: Request) {
       $push: { likes: currentUser._id },
     });
 
-    //   await Notification.create({
-    //     user: String(comment.user),
-    //     body: "Someone liked on your replied post!",
-    //   });
+    await Notification.create({
+      user: String(comment.user),
+      body: "Someone liked on your replied post!",
+    });
 
-    //   await User.findOneAndUpdate(
-    //     { _id: String(comment.user) },
-    //     { $set: { hasNewNotifications: true } }
-    //   );
+    await User.findOneAndUpdate(
+      { _id: String(comment.user) },
+      { $set: { hasNewNotifications: true } }
+    );
 
     return NextResponse.json({ message: "Comment liked" });
   } catch (error) {

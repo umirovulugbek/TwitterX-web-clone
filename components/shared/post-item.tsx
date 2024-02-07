@@ -96,6 +96,10 @@ const PostItem = ({ post, user, setPosts }: Props) => {
   const goToPost = async () => {
     router.push(`/posts/${post?._id}`);
   };
+  const goToProfile = async (e: any) => {
+    e.stopPropagation();
+    router.push(`/profile/${post?.user._id}`);
+  };
   return (
     <div className="border-b-[1px] border-neutral-800 p-5 cursor-pointer hover:bg-neutral-900 transition relative">
       {isLoading && (
@@ -109,16 +113,22 @@ const PostItem = ({ post, user, setPosts }: Props) => {
         className="flex flex-row items-center gap-3 cursor-pointer"
         onClick={goToPost}
       >
-        <Avatar>
+        <Avatar onClick={goToProfile}>
           <AvatarImage src={post.user.profileImage} />
           <AvatarFallback>{post.user.name[0]}</AvatarFallback>
         </Avatar>
         <div>
-          <div className="flex flex-row items-center gap-2">
+          <div
+            className="flex flex-row items-center gap-2"
+            onClick={goToProfile}
+          >
             <p className="text-white font-semibold cursor-pointer hover:underline">
               {post.user.name}
             </p>
-            <span className="text-neutral-500 cursor-pointer hover:underline hidden md:block">
+            <span
+              className="text-neutral-500 cursor-pointer hover:underline hidden md:block"
+              onClick={goToProfile}
+            >
               {post.user.username
                 ? `@${sliceText(post.user.username, 16)}`
                 : sliceText(post.user.email, 16)}

@@ -2,6 +2,7 @@
 import Form from "@/components/shared/form";
 import Header from "@/components/shared/header";
 import PostItem from "@/components/shared/post-item";
+import usePosts from "@/hook/usePost";
 import { authOptions } from "@/lib/auth-option";
 import { IPost } from "@/types";
 import axios from "axios";
@@ -14,23 +15,13 @@ const Page = () => {
   // const session: any = await getServerSession(authOptions);/
   const { data: session, status }: any = useSession();
   const [post, setPost] = useState<IPost[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data, isLoading } = usePosts();
 
   useEffect(() => {
-    getPost();
-  }, []);
-
-  const getPost = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await axios.get("/api/posts?limit=50");
+    if (data) {
       setPost(data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
     }
-  };
+  }, [data]);
 
   return (
     <div>

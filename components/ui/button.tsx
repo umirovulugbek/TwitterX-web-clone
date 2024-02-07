@@ -1,27 +1,27 @@
 import { cn } from "@/lib/utils";
 import React, { ReactNode } from "react";
-interface Buttonprops {
+interface ButtonProps {
   label: ReactNode | string;
   secondary?: boolean;
   fullWidth?: boolean;
   large?: boolean;
   disabled?: boolean;
-  type?: "button" | "submit";
   outline?: boolean;
+  type?: "button" | "submit";
   onClick?: () => void;
-  classNames: string;
+  classNames?: string;
 }
 const Button = ({
   label,
-  secondary,
+  disabled,
   fullWidth,
   large,
-  disabled,
-  type,
-  outline,
   onClick,
+  outline,
+  secondary,
+  type,
   classNames,
-}: Buttonprops) => {
+}: ButtonProps) => {
   return (
     <button
       disabled={disabled}

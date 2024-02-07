@@ -1,3 +1,4 @@
+import Notification from "@/database/natification.model";
 import Post from "@/database/post.model";
 import User from "@/database/user.model";
 import { connectToDatabase } from "@/lib/mongoose";
@@ -15,10 +16,10 @@ export async function PUT(req: Request) {
       { new: true }
     );
 
-    //     await Notification.create({
-    //       user: String(post.user),
-    //       body: "Someone liked your post!",
-    //     });
+    await Notification.create({
+      user: String(post.user),
+      body: "Someone liked your post!",
+    });
 
     await User.findOneAndUpdate(
       { _id: String(post.user) },
