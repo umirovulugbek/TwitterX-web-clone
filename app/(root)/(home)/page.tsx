@@ -42,7 +42,7 @@ const Page = () => {
             <PostItem
               key={post?._id}
               post={post}
-              user={JSON.parse(JSON.stringify(session.currentUser))}
+              user={JSON.parse(JSON.stringify(session?.currentUser))}
               setPosts={setPost}
             />
           ))}
